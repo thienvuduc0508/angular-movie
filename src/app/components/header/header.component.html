@@ -1,0 +1,32 @@
+<header class="header {{show$|async}}" [ngClass]="{'mobile-view': mobileMenu$|async }">
+    <div class="content-wrapper">
+        <div class="logo">
+            <img src="assets/images/movix-logo.png" alt="logo">
+        </div>
+        <ul class="menu-items">
+            <li class="menu-item">Movies</li>
+            <li class="menu-item">TV Shows</li>
+            <li class="menu-item" (click)="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></li>
+        </ul>
+
+        <div class="mobile-menu-items">
+            <i class="fa-solid fa-magnifying-glass" (click)="openSearch()"></i>
+            @if(mobileMenu$|async) {
+            <i class="fa-solid fa-xmark" (click)="mobileMenu$.next(false)"></i>
+            } @else {
+            <i class="fa-solid fa-bars" (click)="openMobileMenu()"></i>
+            }
+        </div>
+    </div>
+
+    @if(showSearch$|async) {
+    <div class="search-bar">
+        <div class="content-wrapper">
+            <div class="search-input">
+                <input type="text" placeholder="Search for a movie or tv show...">
+                <i class="fa-solid fa-xmark" (click)="showSearch$.next(false)"></i>
+            </div>
+        </div>
+    </div>
+    }
+</header>
