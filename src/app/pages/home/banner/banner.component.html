@@ -10,8 +10,8 @@
             <span class="title">Welcome.</span>
             <span class="sub-title">Millions of movies, TV shows and people to discover.</span>
             <div class="search-input">
-                <input type="text" placeholder="Search for a movie or tv show...">
-                <button>Search</button>
+                <input type="text" placeholder="Search for a movie or tv show..." [formControl]="searchInput" (keyup)="handleKeyUp($event)">
+                <button (click)="submitSearch()">Search</button>
             </div>
         </div>
     </div>

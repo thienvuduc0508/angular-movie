@@ -13,3 +13,9 @@ export interface HomeModel {
     url: URL;
     genres: Genres[]
 }
+
+export interface SearchResult {
+    data: any[];
+    page: number;
+    hasMorePages: boolean;
+}

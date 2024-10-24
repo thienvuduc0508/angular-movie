@@ -1,0 +1,25 @@
+<div class="search-results-page">
+    @if(loadingInit$|async){
+        <app-loader></app-loader>
+    } @else {
+        <div class="content-wrapper">
+            @if((data$|async).length > 0) {
+                <div class="scroll-container content" infiniteScroll 
+                    [infiniteScrollDistance]="2" 
+                    [infiniteScrollThrottle]="150" 
+                    (scrolled)="onScroll()">
+                    @for(item of data$|async; track item) {
+                        @if(item.media_type !== 'person'){
+                            <div app-movie-card [data]="item"></div>
+                        }
+                    }
+                </div>
+
+            } @else {
+                <span class="result-notFound">
+                    Results not found!
+                </span>
+            }
+        </div>
+    }
+</div>
