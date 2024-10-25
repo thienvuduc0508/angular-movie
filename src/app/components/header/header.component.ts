@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -16,6 +17,7 @@ export class HeaderComponent {
   mobileMenu$ = new BehaviorSubject<boolean>(false);
   showSearch$ = new BehaviorSubject<boolean>(false);
 
+  @HostListener('window:scroll', ['$event'])
   controlNavbar() {
     if(window.scrollY > 200) {
       if(window.scrollY > this.lastScrollY$.value && !this.mobileMenu$.value) {
@@ -29,13 +31,11 @@ export class HeaderComponent {
     this.lastScrollY$.next(window.scrollY);
   }
 
+
+
   ngOnInit(): void {
-    window.addEventListener('scroll', this.controlNavbar)
   }
 
-  ngOnDestroy() :void {
-    window.removeEventListener('scroll', this.controlNavbar);
-  }
 
   openSearch() {
     this.mobileMenu$.next(false);

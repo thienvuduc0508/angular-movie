@@ -2,6 +2,8 @@ import { Component, inject, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getApiConfig } from '../../core/store/home.selector';
 import { map } from 'rxjs';
+import dayjs from 'dayjs';
+
 
 @Component({
   selector: '[app-movie-card]',
@@ -28,5 +30,7 @@ export class MovieCardComponent {
     }
   }
 
-
+  formatDate(date: string | Date) {
+    return dayjs(date).format("MMM D, YYYY");
+  }
 }

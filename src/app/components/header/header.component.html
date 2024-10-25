@@ -1,11 +1,11 @@
 <header class="header {{show$|async}}" [ngClass]="{'mobile-view': mobileMenu$|async }">
     <div class="content-wrapper">
-        <div class="logo">
+        <div class="logo" routerLink="/">
             <img src="assets/images/movix-logo.png" alt="logo">
         </div>
         <ul class="menu-items">
-            <li class="menu-item">Movies</li>
-            <li class="menu-item">TV Shows</li>
+            <li class="menu-item" routerLink="/explore/movie">Movies</li>
+            <li class="menu-item" routerLink="/explore/tv">TV Shows</li>
             <li class="menu-item" (click)="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></li>
         </ul>
 

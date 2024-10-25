@@ -1,3 +1,5 @@
+@import './mixin.scss';
+
 :root {
     font-family: Inter, Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -66,6 +68,24 @@ body {
     @keyframes shimmer {
         100% {
             transform: translateX(100%);
+        }
+    }
+}
+
+.movie-card {
+    width: calc(50% - 5px);
+    margin-bottom: 25px;
+    cursor: pointer;
+    flex-shrink: 0;
+    @include md {
+        width: calc(25% - 15px);
+    }
+    @include lg {
+        width: calc(20% - 16px);
+    }
+    &:hover {
+        .poster-block {
+            opacity: 0.5;
         }
     }
 }

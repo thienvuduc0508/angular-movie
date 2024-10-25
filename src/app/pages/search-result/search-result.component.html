@@ -4,16 +4,20 @@
     } @else {
         <div class="content-wrapper">
             @if((data$|async).length > 0) {
+                <div class="page-title">Search results for '{{query$|async}}'</div>
                 <div class="scroll-container content" infiniteScroll 
                     [infiniteScrollDistance]="2" 
                     [infiniteScrollThrottle]="150" 
                     (scrolled)="onScroll()">
-                    @for(item of data$|async; track item) {
+                    @for(item of data$|async; track item.id) {
                         @if(item.media_type !== 'person'){
-                            <div app-movie-card [data]="item"></div>
+                            <div class="movie-card" app-movie-card [data]="item"></div>
                         }
                     }
                 </div>
+                @if(loadingMore$|async){
+                    <app-loader></app-loader>
+                }
 
             } @else {
                 <span class="result-notFound">

@@ -1,0 +1,46 @@
+<div class="explore-page">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <div class="page-title">
+                @if(mediaType == 'tv'){
+                    Explore TV Shows
+                } @else {
+                    Explore Movies
+                }
+            </div>
+            <div class="filters">
+                <select (change)="onSelectChange($event, 'with_genres')">
+                    @for(genre of (genresList$|async).genres; track genre){
+                        <option [value]="genre?.id">{{genre?.name}}</option>
+                    }
+                </select>
+                <select (change)="onSelectChange($event, 'sort_by')">
+                    @for(option of filterOptions; track option.value) {
+                        <option [value]="option.value">{{option.label}}</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        @if (loading$|async) {
+            <app-loader></app-loader>
+        } @else {
+            @if ((data$|async).results.length > 0) {
+                <div class="scroll-container content" infiniteScroll 
+                    [infiniteScrollDistance]="2" 
+                    [infiniteScrollThrottle]="5" 
+                    (scrolled)="onScroll()">
+                    @for(item of (data$|async).results; track item) {
+                        <div class="movie-card" app-movie-card [data]="item"></div>
+                    }
+                </div>
+
+            } @else {
+                <span class="result-notFound">Results not found!</span>
+            }
+        }
+        <div>
+
+        </div>
+    </div>
+</div>
