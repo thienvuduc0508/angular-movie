@@ -2,14 +2,16 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, map } from 'rxjs';
+import dayjs from 'dayjs';
+
 import { getApiConfig } from '../../core/store/home.selector';
 import { GenresComponent } from "../genres/genres.component";
-import dayjs from 'dayjs';
+import { CircleProgressComponent } from "../../shared/circle-progress/circle-progress.component";
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [CommonModule, GenresComponent],
+  imports: [CommonModule, GenresComponent, CircleProgressComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -49,4 +51,5 @@ scrollNavigation(direction: string) {
     });
   }
 }
+
 }

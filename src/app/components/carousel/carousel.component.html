@@ -1,33 +1,33 @@
-
 <div class="carousel">
     <div class="content-wrapper">
         @if (title) {
-            <div class="carousel-title">{{title}}</div>
+        <div class="carousel-title">{{title}}</div>
         }
         <i class="fa-solid fa-circle-arrow-left carousel-left-nav arrow" (click)="scrollNavigation('left')"></i>
-        <i class="fa-solid fa-circle-arrow-right carousel-right-nav arrow" (click)="scrollNavigation('right')" ></i>
+        <i class="fa-solid fa-circle-arrow-right carousel-right-nav arrow" (click)="scrollNavigation('right')"></i>
         @if(!loading) {
-            <div class="carousel-items" #carouselContainer>
-                @for(item of data; track $index){
-                    <div class="carousel-item">
-                        <div class="poster-block">
-                            <img [src]="item.poster_path ? url+item.poster_path : fallback" />
-                            <app-genres [data]="item.genre_ids.slice(0, 2)"></app-genres>
-                        </div>
-                        <div class="text-block">
-                            <span class="title">{{item.title || item.name}}</span>
-                            <span class="date">{{formatDate(item.release_date || item.first_air_date)}}</span>
-                        </div>
-                    </div>
-                }
+        <div class="carousel-items" #carouselContainer>
+            @for(item of data; track $index){
+            <div class="carousel-item">
+                <div class="poster-block">
+                    <img [src]="item.poster_path ? url+item.poster_path : fallback" />
+                    <app-round-progress [current]="item.vote_average.toFixed(1)" [color]="item.vote_average.toFixed(1) < 5 ? 'red': item.vote_average.toFixed(1) < 7? 'orange': 'green'" ></app-round-progress>
+                    <app-genres [data]="item.genre_ids.slice(0, 2)"></app-genres>
+                </div>
+                <div class="text-block">
+                    <span class="title">{{item.title || item.name}}</span>
+                    <span class="date">{{formatDate(item.release_date || item.first_air_date)}}</span>
+                </div>
             </div>
+            }
+        </div>
         } @else {
-            <div class="loading-skeleton">
-                <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
-                <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
-                <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
-                <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
-            </div>
+        <div class="loading-skeleton">
+            <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
+            <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
+            <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
+            <ng-container [ngTemplateOutlet]="skeleton"></ng-container>
+        </div>
         }
     </div>
 </div>
