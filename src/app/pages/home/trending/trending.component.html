@@ -1,1 +1,7 @@
-<p>trending works!</p>
+<div class="carousel-section">
+    <div class="content-wrapper">
+        <span class="carousel-title">Trending</span>
+        <app-switch-tab [tabs]="['day', 'week']" (onTabChange)="handleTabChange($event)" ></app-switch-tab>
+    </div>
+    <app-carousel [data]="data$|async" [loading]="loading$|async" ></app-carousel>
+</div>

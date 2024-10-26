@@ -31,4 +31,8 @@ export class HomeService extends BaseService {
             }))
           )
     }
+
+    getTrending(endPoint: 'day'|'week') {
+        return this.http.get(`${this.BASE_URL}/trending/movie/${endPoint}`);
+    }
 }

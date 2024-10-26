@@ -1,0 +1,8 @@
+<div class="switching-tabs">
+    <div class="tab-items">
+        @for(tab of tabs; track $index){
+            <span class="tab-item" [ngClass]="{'active': selectedTab == tab}" (click)="activeTab(tab, $index)">{{tab}}</span>
+        }
+        <span class="moving-bg" #bgMoving></span>
+    </div>
+</div>

@@ -28,7 +28,7 @@ export class BannerComponent {
   ngOnInit() {
     this.loadBanner();
     this.searchInput.valueChanges.pipe(
-      debounceTime(500),
+      debounceTime(200),
       distinctUntilChanged(),
       filter(Boolean)
     ).subscribe((val: string) => this.query$.next(val))

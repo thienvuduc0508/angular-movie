@@ -1,0 +1,7 @@
+<div class="genres">
+    @for (item of data; track $index) {
+        @if(getGenresFromId(item)){
+            <div class="genre">{{getGenresFromId(item)}}</div>
+        }
+    }
+</div>
