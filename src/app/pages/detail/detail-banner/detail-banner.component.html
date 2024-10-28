@@ -1,0 +1,115 @@
+<div class="details-banner">
+    @if (loading$|async) {
+    <div class="details-banner-skeleton">
+        <div class="content-wrapper">
+            <div class="left skeleton"></div>
+            <div class="right">
+                <div class="row skeleton"></div>
+                <div class="row skeleton"></div>
+                <div class="row skeleton"></div>
+                <div class="row skeleton"></div>
+                <div class="row skeleton"></div>
+                <div class="row skeleton"></div>
+                <div class="row skeleton"></div>
+            </div>
+        </div>
+    </div>
+    } @else {
+    @if(data$|async) {
+    <ng-container *ngVar="data$|async as data">
+        <div class="backdrop-img">
+            <img [src]="backdropSrc" />
+        </div>
+        <div class="opacity-layer"></div>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="left">
+                    <img class="poster-img" [src]="posterSrc" />
+                </div>
+                <div class="right">
+                    <div class="title">
+                        {{data.name || data.title}} ({{(data.release_date || data.first_air_date) | formatDate}})
+                    </div>
+                    <div class="sub-title">{{data.tagline}}</div>
+                    <app-genres [data]="genres"></app-genres>
+                    <div class="row">
+                        <app-round-progress class="circle-rating" [current]="data.vote_average.toFixed(1)"></app-round-progress>
+                        <div class="play-btn" (click)="openTrailer()">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
+                                viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7" xml-space="preserve">
+                                <polygon class="triangle" fill="none" stroke-width="7" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-miterlimit="10"
+                                    points="73.5,62.5 148.5,105.8 73.5,149.1 "></polygon>
+                                <circle class="circle" fill="none" stroke-width="7" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3">
+                                </circle>
+                            </svg>
+                            <span class="text"> Watch Trailer </span>
+                        </div>
+                    </div>
+                    <div class="overview">
+                        <div class="heading">Overview</div>
+                        <div class="description">{{data.overview}}</div>
+                    </div>
+                    <div class="info">
+                        @if(data.status){
+                        <div class="info-item">
+                            <span class="text bold">Status:</span>
+                            <span class="text">{{data.status}}</span>
+                        </div>
+                        }
+                        @if(data.release_date || data.first_air_date ) {
+                        <div class="info-item">
+                            <span class="text bold">Release Date:</span>
+                            <span class="text">{{(data.release_date || data.first_air_date)|formatDate}}</span>
+                        </div>
+                        }
+                        @if(data.runtime) {
+                        <div class="info-item">
+                            <span class="text bold">Runtime:</span>
+                            <span class="text">{{toHoursAndMinutes(data.runtime)}}</span>
+                        </div>
+                        }
+                    </div>
+
+                    @if(director.length > 0){
+                    <div class="info">
+                        <span class="text bold">Director:</span>
+                        <span class="text">
+                            @for (d of director; track $index) {
+                            <span>{{ d.name }}{{director.length-1 == $index ? '': ', '}}</span>
+                            }
+                        </span>
+                    </div>
+                    }
+
+                    @if(writer.length > 0){
+                    <div class="info">
+                        <span class="text bold">Writer:</span>
+                        <span class="text">
+                            @for (w of writer; track $index) {
+                            <span>{{ w.name }}{{writer.length-1 == $index ? '': ', '}}</span>
+                            }
+                        </span>
+                    </div>
+                    }
+
+                    @if(data.created_by?.length > 0){
+                    <div class="info">
+                        <span class="text bold">Creator:</span>
+                        <span class="text">
+                            @for (c of data.created_by; track $index) {
+                            <span>{{ c.name }}{{data.created_by.length-1 == $index ? '': ', '}}</span>
+                            }
+                        </span>
+                    </div>
+                    }
+                </div>
+            </div>
+            <app-video-popup #videoPopup></app-video-popup>
+        </div>
+    </ng-container>
+    }
+    }
+</div>

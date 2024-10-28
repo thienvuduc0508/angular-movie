@@ -1,0 +1,6 @@
+<div class="carousel-section">
+    <div class="content-wrapper">
+        <span class="carousel-title">{{title}}</span>
+    </div>
+    <app-carousel [data]="(data$|async)?.results" [loading]="loading$|async" ></app-carousel>
+</div>

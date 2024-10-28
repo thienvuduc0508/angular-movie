@@ -6,11 +6,11 @@
         <ul class="menu-items">
             <li class="menu-item" routerLink="/explore/movie">Movies</li>
             <li class="menu-item" routerLink="/explore/tv">TV Shows</li>
-            <li class="menu-item" (click)="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></li>
+            <!-- <li class="menu-item" (click)="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></li> -->
         </ul>
 
         <div class="mobile-menu-items">
-            <i class="fa-solid fa-magnifying-glass" (click)="openSearch()"></i>
+            <!-- <i class="fa-solid fa-magnifying-glass" (click)="openSearch()"></i> -->
             @if(mobileMenu$|async) {
             <i class="fa-solid fa-xmark" (click)="mobileMenu$.next(false)"></i>
             } @else {

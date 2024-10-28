@@ -89,3 +89,9 @@ body {
         }
     }
 }
+
+.circle-rating {
+    & .progress-wrapper {
+        top: 0 !important;
+    }
+}

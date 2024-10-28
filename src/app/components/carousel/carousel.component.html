@@ -8,10 +8,10 @@
         @if(!loading) {
         <div class="carousel-items" #carouselContainer>
             @for(item of data; track $index){
-            <div class="carousel-item">
+            <div class="carousel-item" [routerLink]="['/detail', item.media_type || endPoint , item.id]">
                 <div class="poster-block">
                     <img [src]="item.poster_path ? url+item.poster_path : fallback" />
-                    <app-round-progress [current]="item.vote_average.toFixed(1)" [color]="item.vote_average.toFixed(1) < 5 ? 'red': item.vote_average.toFixed(1) < 7? 'orange': 'green'" ></app-round-progress>
+                    <app-round-progress [current]="item.vote_average.toFixed(1)" ></app-round-progress>
                     <app-genres [data]="item.genre_ids.slice(0, 2)"></app-genres>
                 </div>
                 <div class="text-block">

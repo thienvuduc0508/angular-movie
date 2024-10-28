@@ -1,0 +1,7 @@
+<div>
+    <app-detail-banner [video]="(video$|async)?.results?.[0]" [crew]="(credit$|async)?.crew" [mediaType]="mediaType"
+        [id]="id">
+    </app-detail-banner>
+    <app-cast [data]="(credit$|async)?.cast" [loading]="loading$|async"></app-cast>
+    <app-similar [mediaType]="mediaType" [id]="id"></app-similar>
+</div>

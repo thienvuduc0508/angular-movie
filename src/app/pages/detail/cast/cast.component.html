@@ -1,0 +1,35 @@
+<div class="cast-section">
+    <div class="content-wrapper">
+        <div class="section-heading">Top Cast</div>
+        @if(!loading) {
+        <div class="list-items">
+            @for (item of data; track $index) {
+            <div class="list-item">
+                <div class="profile-img">
+                    <img [src]="item?.profile_path? srcImg+item.profile_path : fallBack" />
+                </div>
+                <div class="name">{{item?.name}}</div>
+                <div class="character">{{item?.character}}</div>
+            </div>
+            }
+        </div>
+        } @else {
+            <div class="cast-skeleton">
+                <ng-container [ngTemplateOutlet]="skeletonLoading"></ng-container>
+                <ng-container [ngTemplateOutlet]="skeletonLoading"></ng-container>
+                <ng-container [ngTemplateOutlet]="skeletonLoading"></ng-container>
+                <ng-container [ngTemplateOutlet]="skeletonLoading"></ng-container>
+                <ng-container [ngTemplateOutlet]="skeletonLoading"></ng-container>
+                <ng-container [ngTemplateOutlet]="skeletonLoading"></ng-container>
+            </div>
+        }
+    </div>
+</div>
+
+<ng-template #skeletonLoading>
+    <div class="skItem">
+        <div class="circle skeleton"></div>
+        <div class="row skeleton"></div>
+        <div class="row2 skeleton"></div>
+    </div>
+</ng-template>

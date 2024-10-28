@@ -10,5 +10,4 @@ import {RoundProgressComponent} from 'angular-svg-round-progressbar';
 })
 export class CircleProgressComponent {
   @Input() current: number = 0;
-  @Input() color: string = '';
 }

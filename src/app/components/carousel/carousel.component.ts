@@ -7,11 +7,12 @@ import dayjs from 'dayjs';
 import { getApiConfig } from '../../core/store/home.selector';
 import { GenresComponent } from "../genres/genres.component";
 import { CircleProgressComponent } from "../../shared/circle-progress/circle-progress.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [CommonModule, GenresComponent, CircleProgressComponent],
+  imports: [CommonModule, GenresComponent, CircleProgressComponent, RouterModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,6 +22,7 @@ export class CarouselComponent {
 @Input() data: any[] = [];
 @Input() loading: boolean | null = false;
 @ViewChild('carouselContainer') carouselContainer: ElementRef;
+@Input() endPoint: string = '';
 
 url: string = '';
 fallback: string = 'assets/images/no-poster.png';
