@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { HomeService } from '../../../core/services/home.service';
 import { BehaviorSubject, map, take, tap } from 'rxjs';
 import { SwitchTabComponent } from "../../../shared/switch-tab/switch-tab.component";
@@ -6,26 +6,37 @@ import { CarouselComponent } from "../../../components/carousel/carousel.compone
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-trending',
+  selector: 'app-ingredient',
   standalone: true,
   imports: [SwitchTabComponent, CarouselComponent, CommonModule],
-  templateUrl: './trending.component.html',
-  styleUrl: './trending.component.scss'
+  templateUrl: './ingredient.component.html',
+  styleUrl: './ingredient.component.scss'
 })
-export class TrendingComponent {
-  endPoint: 'day'|'week' = 'day';
+export class IngredientComponent {
+  endPoint: string = '';
   data$ = new BehaviorSubject<any>([]);
   loading$ = new BehaviorSubject<boolean>(false);
 
+  @Input() tabs: string[] = [];
+  @Input() type: string = '';
+  @Input() defaultTab!: string;
+
   private homeService = inject(HomeService);
 
-  ngOnInit() {
-    this.loadTrending();
-
+  mapingEndPoint: { [key: string]: string } = {
+    'day': 'day',
+    'week': 'week',
+    'movies': 'movie',
+    'TV shows': 'tv',
   }
 
-  loadTrending() {
-    this.homeService.getTrending(this.endPoint).pipe(
+  ngOnInit() {
+    if(!this.endPoint) this.endPoint = this.type == 'Trending' ? 'day' : 'movies'; 
+    this.loadData();
+  }
+
+  loadData() {
+    this.homeService.getIngredientData(this.mapingEndPoint[this.endPoint], this.type).pipe(
       tap(() => this.loading$.next(true)),
       map((res: any) => res.results)
     ).subscribe((results) => {
@@ -34,9 +45,9 @@ export class TrendingComponent {
     })
   }
 
-  handleTabChange(tab: 'day'|'week') {
+  handleTabChange(tab: string) {
     this.endPoint = tab;
-    this.loadTrending();
+    this.loadData();
   }
 
 

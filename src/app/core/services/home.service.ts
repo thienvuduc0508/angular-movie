@@ -2,6 +2,7 @@ import { HttpClient, HttpRequest } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { BaseService } from "./base.service";
 import { map } from "rxjs/operators";
+import { EMPTY } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -25,14 +26,22 @@ export class HomeService extends BaseService {
     searchQuery(index: number, query: string) {
         return this.http.get(`${this.BASE_URL}/search/multi?query=${query}&page=${index}`).pipe(
             map((response: any) => ({
-              data: response?.results,
-              page: response?.page,
-              hasMorePages: response?.page < response?.total_pages,
+                data: response?.results,
+                page: response?.page,
+                hasMorePages: response?.page < response?.total_pages,
             }))
-          )
+        )
     }
 
-    getTrending(endPoint: 'day'|'week') {
-        return this.http.get(`${this.BASE_URL}/trending/movie/${endPoint}`);
+    getIngredientData(endPoint: string, type: string) {
+        switch (type) {
+            case 'Trending':
+                return this.http.get(`${this.BASE_URL}/trending/movie/${endPoint}`);
+            case 'What Popular':
+                return this.http.get(`${this.BASE_URL}/${endPoint}/popular`);
+            case 'Top Rated':
+                return this.http.get(`${this.BASE_URL}/${endPoint}/top_rated`);
+            default: return EMPTY;
+        }
     }
 }

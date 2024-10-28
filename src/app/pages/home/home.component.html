@@ -1,4 +1,6 @@
 <div class="home-page">
     <app-banner></app-banner>
-    <app-trending></app-trending>
+    <app-ingredient [tabs]="trendingTabs" [type]="'Trending'" [defaultTab]="'day'"></app-ingredient>
+    <app-ingredient [tabs]="popularAndRatedTabs" [type]="'What Popular'" [defaultTab]="'movies'" ></app-ingredient>
+    <app-ingredient [tabs]="popularAndRatedTabs" [type]="'Top Rated'" [defaultTab]="'movies'"></app-ingredient>
 </div>

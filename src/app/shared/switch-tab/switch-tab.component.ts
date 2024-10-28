@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, inject, Input, Output, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-switch-tab',
@@ -16,15 +16,11 @@ export class SwitchTabComponent {
 
   private renderer = inject(Renderer2);
 
-  selectedTab: string = 'day';
+  selectedTab: number = 0;
 
   activeTab(tab: string, index: number) {
-    this.selectedTab = tab;
-    if(tab == 'day') {
-      this.renderer.setStyle(this.bgMoving.nativeElement, 'left', 0)
-    } else {
-      this.renderer.setStyle(this.bgMoving.nativeElement, 'left', '100px')
-    }
+    this.selectedTab = index;
+    this.renderer.setStyle(this.bgMoving.nativeElement, 'left', index * 100 + 'px')
     this.onTabChange.emit(tab);
   }
 
