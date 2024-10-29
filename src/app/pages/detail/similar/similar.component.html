@@ -2,5 +2,5 @@
     <div class="content-wrapper">
         <span class="carousel-title">{{title}}</span>
     </div>
-    <app-carousel [data]="(data$|async)?.results" [loading]="loading$|async" ></app-carousel>
+    <app-carousel [data]="(data$|async)?.results" [loading]="loading$|async" [endPoint]="mediaType" ></app-carousel>
 </div>

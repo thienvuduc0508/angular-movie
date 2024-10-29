@@ -39,16 +39,18 @@ export class DetailBannerComponent implements OnChanges {
   private detailService = inject(DetailService);
   private store = inject(Store);
   ngOnInit(): void {
-    this.loadInit();
+    // this.loadInit();
   }
   
   ngOnChanges(changes: SimpleChanges): void {
+    window.scrollTo(0,0);
     if(changes['crew']) {
       this.director = this.crew?.filter((f: any) => f.job == 'Director');
       this.writer = this.crew?.filter(
         (f: any) => ['Screenplay', 'Story', 'Writer'].indexOf(f.job) > -1 
       )
     }
+    this.loadInit();
   }
 
   loadInit() {

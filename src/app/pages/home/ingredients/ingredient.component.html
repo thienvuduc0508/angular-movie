@@ -3,5 +3,5 @@
         <span class="carousel-title">{{type}}</span>
         <app-switch-tab [tabs]="tabs" (onTabChange)="handleTabChange($event)" ></app-switch-tab>
     </div>
-    <app-carousel [data]="data$|async" [loading]="loading$|async" ></app-carousel>
+    <app-carousel [data]="data$|async" [loading]="loading$|async"  [endPoint]="mapingEndPoint[endPoint]"></app-carousel>
 </div>

@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, forkJoin, switchMap, tap } from 'rxjs';
 import { DetailService } from '../../core/services/details.service';
 import { DetailBannerComponent } from "./detail-banner/detail-banner.component";
@@ -18,10 +18,12 @@ export class DetailComponent {
 
   private route = inject(ActivatedRoute);
   private detailService = inject(DetailService);
+  private router = inject(Router)
 
   video$ = new BehaviorSubject<any>({});
   credit$ = new BehaviorSubject<any>({});
   loading$ = new BehaviorSubject<boolean>(false);
+  error$ = new BehaviorSubject<boolean>(false);
   mediaType: string = '';
   id: number = 0;
 
@@ -37,6 +39,8 @@ export class DetailComponent {
       this.video$.next(videoData);
       this.credit$.next(creditsData);
       this.loading$.next(false);
+    }, error => {
+      this.router.navigate(['/404'])
     })
   }
 

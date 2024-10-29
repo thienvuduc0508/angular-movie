@@ -31,7 +31,7 @@ export class IngredientComponent {
   }
 
   ngOnInit() {
-    if(!this.endPoint) this.endPoint = this.type == 'Trending' ? 'day' : 'movies'; 
+    if(!this.endPoint) this.endPoint = this.type == 'Trending' ? 'day' : 'movies';
     this.loadData();
   }
 

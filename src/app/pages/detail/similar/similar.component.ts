@@ -23,7 +23,7 @@ export class SimilarComponent implements OnChanges {
   title: string = '';
 
   ngOnChanges(changes: SimpleChanges): void {
-      if (changes['mediaType'] && changes['id']) {
+      if (changes['mediaType'] || changes['id']) {
         this.title = this.mediaType == 'tv' ? 'Similar TV Shows': 'Similar Movies';
         this.detailService.getSimilar(this.mediaType, this.id).pipe(
           tap(() => this.loading$.next(true))

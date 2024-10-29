@@ -8,7 +8,7 @@
         @if(!loading) {
         <div class="carousel-items" #carouselContainer>
             @for(item of data; track $index){
-            <div class="carousel-item" [routerLink]="['/detail', item.media_type || endPoint , item.id]">
+            <div class="carousel-item" routerLink="/{{item.media_type || endPoint}}/{{item.id}}">
                 <div class="poster-block">
                     <img [src]="item.poster_path ? url+item.poster_path : fallback" />
                     <app-round-progress [current]="item.vote_average.toFixed(1)" ></app-round-progress>

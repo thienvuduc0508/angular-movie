@@ -73,7 +73,7 @@
                         }
                     </div>
 
-                    @if(director.length > 0){
+                    @if((director || []).length > 0){
                     <div class="info">
                         <span class="text bold">Director:</span>
                         <span class="text">
@@ -84,7 +84,7 @@
                     </div>
                     }
 
-                    @if(writer.length > 0){
+                    @if((writer || []).length > 0){
                     <div class="info">
                         <span class="text bold">Writer:</span>
                         <span class="text">
